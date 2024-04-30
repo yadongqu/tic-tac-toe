@@ -1,7 +1,6 @@
 from typing import  Optional, Tuple, List
 from enum import Enum
 from dataclasses import dataclass
-import random
 class Player(Enum):
     X = 0
     O = 1
@@ -87,30 +86,28 @@ def draw(board: Board) -> None:
                 print("-", end=" ")
         print()
 
-
-
-board = initial_board(3)
-
-def player_move() -> int:
-    action = int(input("Enter your move: "))
-    return action
-
-
-
-while not is_terminal(board):
-    draw(board)
-    action = player_move()
-    while action not in actions(board):
-        print("Invalid move, try again")
+def main():
+    board = initial_board(3)
+    def player_move() -> int:
+        action = int(input("Enter your move: "))
+        return action
+    while not is_terminal(board):
+        draw(board)
         action = player_move()
-    board = result(board, action)
-    action = minimax(board)[1]
-    board = result(board, action)
+        while action not in actions(board):
+            print("Invalid move, try again")
+            action = player_move()
+        board = result(board, action)
+        action = minimax(board)[1]
+        board = result(board, action)
 
-draw(board)
-if is_terminal(board) == Player.X:
-    print("X won")
-elif is_terminal(board) == Player.O:
-    print("O won")
-else:
-    print("draw")
+    draw(board)
+    if is_terminal(board) == Player.X:
+        print("X won")
+    elif is_terminal(board) == Player.O:
+        print("O won")
+    else:
+        print("draw")
+
+if __name__ == "__main__":
+    main()
