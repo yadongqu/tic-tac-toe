@@ -102,9 +102,9 @@ def main():
         board = result(board, action)
 
     draw(board)
-    if is_terminal(board) == Player.X:
+    if winner(board) == Player.X:
         print("X won")
-    elif is_terminal(board) == Player.O:
+    elif winner(board) == Player.O:
         print("O won")
     else:
         print("draw")
